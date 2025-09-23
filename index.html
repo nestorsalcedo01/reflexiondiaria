@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inspiradora</title>
+    <!-- Incluye el CDN de Tailwind CSS para un estilo moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos personalizados para la tipografía y el fondo */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor principal de la página, centrado y con una tarjeta elegante -->
+    <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl max-w-2xl w-full text-center transform transition-transform duration-500 hover:scale-105">
+        
+        <!-- Título principal de la página -->
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            Un Momento de Reflexión
+        </h1>
+
+        <!-- Párrafo principal con el versículo bíblico -->
+        <p id="verse-text" class="text-xl md:text-2xl text-gray-700 font-medium leading-relaxed mb-6">
+            "El Señor es mi fuerza y mi escudo; en él confía mi corazón, y de él recibo ayuda. Mi corazón se regocija, y le daré gracias con mi cántico."
+        </p>
+
+        <!-- Referencia del versículo -->
+        <p class="text-lg text-gray-500 font-semibold mb-8">
+            — Salmos 28:7
+        </p>
+
+        <!-- Botón interactivo -->
+        <button id="change-verse-btn" class="bg-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-300 transition-all duration-300 transform hover:-translate-y-1">
+            Cambiar Versículo
+        </button>
+
+        <!-- Créditos en el pie de página -->
+        <footer class="mt-8 text-sm text-gray-400">
+            Creado con inspiración y código.
+        </footer>
+    </div>
+
+    <script>
+        // Array de versículos inspiradores para el botón
+        const verses = [
+            {
+                text: "El Señor es mi pastor, nada me falta.",
+                reference: "— Salmos 23:1"
+            },
+            {
+                text: "Todo lo puedo en Cristo que me fortalece.",
+                reference: "— Filipenses 4:13"
+            },
+            {
+                text: "Porque yo sé los planes que tengo para ustedes, planes para su bienestar y no para su mal, a fin de darles un futuro y una esperanza.",
+                reference: "— Jeremías 29:11"
+            },
+            {
+                text: "Confía en el Señor con todo tu corazón y no te apoyes en tu propio entendimiento.",
+                reference: "— Proverbios 3:5"
+            },
+            {
+                text: "El amor es paciente, el amor es bondadoso. No es envidioso ni jactancioso ni orgulloso.",
+                reference: "— 1 Corintios 13:4"
+            }
+        ];
+
+        // Obtiene el botón y el texto del versículo por su ID
+        const changeVerseBtn = document.getElementById('change-verse-btn');
+        const verseText = document.getElementById('verse-text');
+        const verseReference = document.querySelector('.text-gray-500');
+        let currentVerseIndex = 0;
+
+        // Función para cambiar el versículo
+        changeVerseBtn.addEventListener('click', () => {
+            currentVerseIndex = (currentVerseIndex + 1) % verses.length;
+            const newVerse = verses[currentVerseIndex];
+            
+            // Actualiza el contenido con una pequeña transición
+            verseText.style.opacity = '0';
+            verseReference.style.opacity = '0';
+            
+            setTimeout(() => {
+                verseText.textContent = newVerse.text;
+                verseReference.textContent = newVerse.reference;
+                verseText.style.opacity = '1';
+                verseReference.style.opacity = '1';
+            }, 300);
+        });
+    </script>
+
+</body>
+</html>
