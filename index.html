@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inspiradora</title>
+    <title>Página Inspiradora con Reflexiones</title>
     <!-- Incluye el CDN de Tailwind CSS para un estilo moderno y responsivo -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importa la fuente Inter de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* Estilos personalizados para la tipografía y el fondo */
         body {
@@ -17,9 +21,13 @@
             min-height: 100vh;
             padding: 1rem;
         }
+        /* Estilo para la transición de opacidad */
+        .fade-in-out {
+            transition: opacity 0.3s ease-in-out;
+        }
     </style>
 </head>
-<body>
+<body class="bg-gray-100">
 
     <!-- Contenedor principal de la página, centrado y con una tarjeta elegante -->
     <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl max-w-2xl w-full text-center transform transition-transform duration-500 hover:scale-105">
@@ -29,19 +37,38 @@
             Un Momento de Reflexión
         </h1>
 
-        <!-- Párrafo principal con el versículo bíblico -->
-        <p id="verse-text" class="text-xl md:text-2xl text-gray-700 font-medium leading-relaxed mb-6">
-            "El Señor es mi fuerza y mi escudo; en él confía mi corazón, y de él recibo ayuda. Mi corazón se regocija, y le daré gracias con mi cántico."
-        </p>
+        <!-- Contenedor para el versículo y su referencia -->
+        <div id="verse-container" class="fade-in-out">
+            <!-- Párrafo principal con el versículo bíblico -->
+            <p id="verse-text" class="text-xl md:text-2xl text-gray-700 font-medium leading-relaxed mb-2">
+                "El Señor es mi fuerza y mi escudo; en él confía mi corazón, y de él recibo ayuda. Mi corazón se regocija, y le daré gracias con mi cántico."
+            </p>
 
-        <!-- Referencia del versículo -->
-        <p class="text-lg text-gray-500 font-semibold mb-8">
-            — Salmos 28:7
-        </p>
+            <!-- Referencia del versículo -->
+            <p id="verse-reference" class="text-lg text-gray-500 font-semibold mb-6">
+                — Salmos 28:7
+            </p>
+        </div>
+
+        <!-- Línea divisoria sutil -->
+        <hr class="my-6 border-gray-200">
+
+        <!-- Contenedor para la reflexión -->
+        <div id="reflection-container" class="fade-in-out">
+             <!-- Título de la sección de reflexión -->
+            <h2 class="text-2xl font-bold text-purple-700 mb-3">Reflexión</h2>
+            <!-- Párrafo con la reflexión -->
+            <p id="reflection-text" class="text-md text-gray-600 leading-relaxed">
+                La confianza en Dios no es pasiva, es una fuente activa de fortaleza y protección. Al depositar nuestra fe en Él, recibimos la ayuda necesaria para enfrentar las batallas de la vida, y nuestro corazón se llena de una alegría que se convierte en alabanza.
+            </p>
+        </div>
+        
+        <!-- Espaciador -->
+        <div class="my-8"></div>
 
         <!-- Botón interactivo -->
         <button id="change-verse-btn" class="bg-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-300 transition-all duration-300 transform hover:-translate-y-1">
-            Cambiar Versículo
+            Nueva Reflexión
         </button>
 
         <!-- Créditos en el pie de página -->
@@ -51,53 +78,154 @@
     </div>
 
     <script>
-        // Array de versículos inspiradores para el botón
+        // Array de 100 objetos, cada uno con un versículo, su referencia y una reflexión basada en el comentario de Matthew Henry.
         const verses = [
-            {
-                text: "El Señor es mi pastor, nada me falta.",
-                reference: "— Salmos 23:1"
-            },
-            {
-                text: "Todo lo puedo en Cristo que me fortalece.",
-                reference: "— Filipenses 4:13"
-            },
-            {
-                text: "Porque yo sé los planes que tengo para ustedes, planes para su bienestar y no para su mal, a fin de darles un futuro y una esperanza.",
-                reference: "— Jeremías 29:11"
-            },
-            {
-                text: "Confía en el Señor con todo tu corazón y no te apoyes en tu propio entendimiento.",
-                reference: "— Proverbios 3:5"
-            },
-            {
-                text: "El amor es paciente, el amor es bondadoso. No es envidioso ni jactancioso ni orgulloso.",
-                reference: "— 1 Corintios 13:4"
-            }
+            { text: "He aquí, yo estoy contigo, y te guardaré por dondequiera que fueres, y volveré a traerte a esta tierra; porque no te dejaré hasta que haya hecho lo que te he dicho.", reference: "— Génesis 28:15", reflection: "Esta promesa, dada a Jacob, revela a un Dios que se compromete con una presencia constante y una protección providencial. Él no nos abandonará hasta que cada palabra de su propósito para nosotros en Cristo se haya cumplido." },
+            { text: "Esforzaos y cobrad ánimo; no temáis, ni tengáis miedo de ellos, porque Jehová tu Dios es el que va contigo; no te dejará, ni te desamparará.", reference: "— Deuteronomio 31:6", reflection: "Nuestra valentía no nace de la autoconfianza, sino de la certeza de la compañía de Dios. Él va delante y junto a nosotros, siendo esta promesa el antídoto divino contra todo temor, asegurándonos que nunca seremos abandonados." },
+            { text: "Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en dondequiera que vayas.", reference: "— Josué 1:9", reflection: "El mandato a ser valientes está intrínsecamente ligado a la promesa de la presencia de Dios. El coraje del creyente no es una emoción ciega, sino una confianza razonada en que el Dios Todopoderoso nos acompaña en cada paso." },
+            { text: "Jehová será refugio del pobre, Refugio para el tiempo de angustia. En ti confiarán los que conocen tu nombre, Por cuanto tú, oh Jehová, no desamparaste a los que te buscaron.", reference: "— Salmos 9:9-10", reflection: "Para el alma oprimida, el Señor es un refugio seguro e inexpugnable. Conocer su carácter (su nombre) es el fundamento de nuestra confianza, pues la experiencia confirma que Dios nunca abandona a quienes le buscan sinceramente." },
+            { text: "Aunque mi padre y mi madre me dejaran, Con todo, Jehová me recogerá.", reference: "— Salmos 27:10", reflection: "Incluso si los lazos terrenales más fuertes fallan, el cuidado de Dios permanece. Su amor paternal es más seguro y constante que cualquier afecto humano, ofreciendo amparo y consuelo cuando nos sentimos más vulnerables." },
+            { text: "Espera en Jehová; Esfuérzate, y aliéntese tu corazón; Sí, espera en Jehová.", reference: "— Salmos 27:14", reflection: "La espera en Dios no es pasividad, sino un acto de fe activa que fortalece el corazón. Debemos esperar con valor y paciencia, confiando en que Su tiempo y Su respuesta son siempre perfectos, renovando así nuestras fuerzas." },
+            { text: "El ángel de Jehová acampa alrededor de los que le temen, Y los defiende.", reference: "— Salmos 34:7", reflection: "No estamos solos en nuestras luchas. Hay una protección celestial, un campamento de poder divino, que rodea a aquellos que viven en reverencia a Dios. Esta guardia angelical nos asegura defensa contra todo mal." },
+            { text: "Encomienda a Jehová tu camino, Y confía en él; y él hará.", reference: "— Salmos 37:5", reflection: "Entregar nuestros planes y preocupaciones a Dios es un acto de fe que le permite obrar. Al confiarle la dirección de nuestra vida, Él se compromete a actuar, enderezando nuestros caminos y llevando a buen término lo que le hemos confiado." },
+            { text: "Porque Jehová ama la rectitud, Y no desampara a sus santos. Para siempre serán guardados.", reference: "— Salmos 37:28", reflection: "El carácter justo de Dios garantiza su fidelidad hacia su pueblo. Su amor por la rectitud se manifiesta en su promesa de nunca abandonar a los que ha apartado para sí, asegurando su preservación eterna." },
+            { text: "Dios es nuestro amparo y fortaleza, Nuestro pronto auxilio en las tribulaciones.", reference: "— Salmos 46:1", reflection: "En medio de las tormentas de la vida, Dios no es un refugio distante, sino una ayuda presente y accesible. Él es nuestra fuerza para resistir y nuestro amparo para encontrar seguridad, siempre dispuesto a socorrernos." },
+            { text: "Porque este Dios es Dios nuestro eternamente y para siempre; Él nos guiará aun más allá de la muerte.", reference: "— Salmos 48:14", reflection: "Nuestra relación con Dios trasciende los límites de esta vida. Él es nuestro Dios por toda la eternidad, y su guía no termina con nuestra muerte, sino que nos conduce a través de ella hacia la gloria eterna." },
+            { text: "Clama a mí, y yo te responderé, y te enseñaré cosas grandes y ocultas que tú no conoces.", reference: "— Jeremías 33:3", reflection: "Dios invita a su pueblo a una comunión íntima a través de la oración, prometiendo no solo una respuesta, sino una revelación. Al clamar a Él, se nos abren las puertas a un entendimiento más profundo de sus planes y maravillas." },
+            { text: "Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal, para daros el fin que esperáis.", reference: "— Jeremías 29:11", reflection: "Aun en tiempos de disciplina o dificultad, los planes de Dios para su pueblo son de bienestar y esperanza. Su propósito final es darnos un futuro glorioso, y esta certeza nos sostiene en medio de las pruebas presentes." },
+            { text: "Mas los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas; correrán, y no se cansarán; caminarán, y no se fatigarán.", reference: "— Isaías 40:31", reflection: "La espera en el Señor renueva nuestra vitalidad espiritual. Esta promesa nos asegura una fuente inagotable de fuerza que nos permite elevarnos sobre las dificultades, perseverar sin agotarnos y avanzar con paso firme." },
+            { text: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia.", reference: "— Isaías 41:10", reflection: "Esta es una de las promesas más completas contra el temor. Dios nos ofrece su presencia, su poder para fortalecernos, su ayuda constante y su sustento justo, cubriendo así toda posible causa de ansiedad." },
+            { text: "Cuando pases por las aguas, yo estaré contigo; y si por los ríos, no te anegarán. Cuando pases por el fuego, no te quemarás, ni la llama arderá en ti.", reference: "— Isaías 43:2", reflection: "Las pruebas de la vida, simbolizadas por el agua y el fuego, son inevitables. Sin embargo, la promesa no es la ausencia de pruebas, sino la presencia protectora de Dios en medio de ellas, garantizando que no seremos destruidos." },
+            { text: "Porque yo Jehová soy tu Dios, quien te sostiene de tu mano derecha, y te dice: No temas, yo te ayudo.", reference: "— Isaías 41:13", reflection: "La imagen de Dios sosteniendo nuestra mano es de una ternura y seguridad incomparables. Es un recordatorio de su guía personal, su apoyo firme y su constante disposición a ayudarnos, disipando así todo temor." },
+            { text: "Con amor eterno te he amado; por tanto, te prolongué mi misericordia.", reference: "— Jeremías 31:3", reflection: "El amor de Dios no es temporal ni condicional; es eterno. Este amor inmutable es la fuente de su inagotable misericordia, que nos atrae hacia Él y nos asegura su favor constante." },
+            { text: "Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su propósito son llamados.", reference: "— Romanos 8:28", reflection: "La providencia de Dios orquesta cada circunstancia, buena o mala, para el bien final de sus hijos. No es que todo sea bueno en sí mismo, sino que Dios lo utiliza para cumplir su propósito redentor en nosotros." },
+            { text: "Todo lo puedo en Cristo que me fortalece.", reference: "— Filipenses 4:13", reflection: "La suficiencia del creyente no reside en sí mismo, sino en la fuerza que Cristo le provee. Esta promesa nos capacita para enfrentar cualquier circunstancia, ya sea de abundancia o de necesidad, con contentamiento y fortaleza espiritual." },
+            { text: "Mi Dios, pues, suplirá todo lo que os falta conforme a sus riquezas en gloria en Cristo Jesús.", reference: "— Filipenses 4:19", reflection: "Nuestras necesidades son finitas, pero los recursos de Dios son infinitos. Él se compromete a suplir cada una de nuestras carencias, no según nuestra pobreza, sino según la inmensidad de sus riquezas celestiales en Cristo." },
+            { text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.", reference: "— Juan 3:16", reflection: "Esta es la promesa central del evangelio. El amor de Dios es la causa, el sacrificio de Cristo es el medio, y la fe es la condición para recibir el regalo más grande: la vida eterna y la salvación del juicio." },
+            { text: "El que cree en el Hijo tiene vida eterna.", reference: "— Juan 3:36", reflection: "La vida eterna no es solo una esperanza futura, sino una posesión presente para el creyente. Desde el momento en que confiamos en Cristo, comenzamos a experimentar la calidad de vida que pertenece a la eternidad." },
+            { text: "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.", reference: "— Mateo 11:28", reflection: "Jesús ofrece un alivio que el mundo no puede dar. Él invita a todos los que están fatigados por el peso del pecado y las preocupaciones de la vida a encontrar en Él el verdadero descanso para el alma." },
+            { text: "Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá.", reference: "— Mateo 7:7", reflection: "Esta triple promesa nos anima a una oración perseverante y audaz. Dios se deleita en responder a sus hijos, asegurándonos que la búsqueda sincera de su voluntad y provisión nunca será en vano." },
+            { text: "Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias. Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.", reference: "— Filipenses 4:6-7", reflection: "La ansiedad se vence llevando cada preocupación a Dios en oración. La respuesta prometida no es siempre un cambio de circunstancias, sino la paz sobrenatural de Dios que actúa como un centinela, protegiendo nuestro interior." },
+            { text: "No os ha sobrevenido ninguna tentación que no sea humana; pero fiel es Dios, que no os dejará ser tentados más de lo que podéis resistir, sino que dará también juntamente con la tentación la salida, para que podáis soportar.", reference: "— 1 Corintios 10:13", reflection: "Dios, en su fidelidad, controla la intensidad y duración de nuestras pruebas. Él promete que nunca seremos probados más allá de nuestra capacidad y que siempre proveerá una vía de escape o la fuerza para resistir." },
+            { text: "De modo que si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron; he aquí todas son hechas nuevas.", reference: "— 2 Corintios 5:17", reflection: "La unión con Cristo produce una transformación radical y fundamental. No es una simple mejora, sino una recreación total. El pasado pecaminoso queda atrás, y se inicia una vida completamente nueva en su naturaleza y dirección." },
+            { text: "Si confesamos nuestros pecados, él es fiel y justo para perdonar nuestros pecados, и limpiarnos de toda maldad.", reference: "— 1 Juan 1:9", reflection: "El perdón de Dios no se basa en nuestro mérito, sino en su carácter fiel y justo, a causa de la obra de Cristo. La confesión sincera abre la puerta a un perdón completo y a una purificación continua de toda injusticia." },
+            { text: "Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.", reference: "— 2 Timoteo 1:7", reflection: "El temor paralizante no proviene de Dios. El Espíritu Santo nos equipa con poder para servir, amor para relacionarnos y dominio propio para gobernarnos a nosotros mismos, contrarrestando así toda inclinación a la timidez." },
+            { text: "Crea en mí, oh Dios, un corazón limpio, Y renueva un espíritu recto dentro de mí.", reference: "— Salmos 51:10", reflection: "Esta es la oración de un pecador arrepentido que reconoce que solo Dios puede realizar la obra de purificación interior. Es una petición confiada en la promesa de que Dios puede y quiere restaurar nuestra pureza y firmeza espiritual." },
+            { text: "El Señor es mi pastor; nada me faltará.", reference: "— Salmos 23:1", reflection: "Bajo el cuidado del Buen Pastor, todas nuestras necesidades reales son satisfechas. Esta promesa nos invita a un contentamiento profundo, confiando en que Aquel que nos guía también proveerá para todo nuestro viaje." },
+            { text: "El Señor es mi luz y mi salvación; ¿de quién temeré? El Señor es la fortaleza de mi vida; ¿de quién he de atemorizarme?", reference: "— Salmos 27:1", reflection: "Cuando Dios es nuestra luz, la oscuridad de la incertidumbre se disipa. Cuando es nuestra salvación y fortaleza, el poder de nuestros enemigos se desvanece. La fe en Él nos libera de todo temor paralizante." },
+            { text: "Porque la paga del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús Señor nuestro.", reference: "— Romanos 6:23", reflection: "Este versículo contrasta de manera contundente el resultado merecido de nuestro pecado con el regalo inmerecido de Dios. La vida eterna no se gana, se recibe gratuitamente por la fe en la obra de Jesucristo." },
+            { text: "Estando persuadido de esto, que el que comenzó en vosotros la buena obra, la perfeccionará hasta el día de Jesucristo.", reference: "— Filipenses 1:6", reflection: "Nuestra salvación y santificación son una obra divina de principio a fin. Podemos tener plena confianza en que Dios, quien inició nuestra transformación, la llevará a su gloriosa culminación." },
+            { text: "Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se gloríe.", reference: "— Efesios 2:8-9", reflection: "La salvación es enteramente un acto de la gracia de Dios, recibido a través de la fe que Él mismo nos da. Excluye cualquier mérito humano, asegurando que toda la gloria sea solo para Dios." },
+            { text: "Justificados, pues, por la fe, tenemos paz para con Dios por medio de nuestro Señor Jesucristo.", reference: "— Romanos 5:1", reflection: "La fe en Cristo cambia nuestro estado legal ante Dios. De enemigos, pasamos a estar en paz con Él. Esta paz no es un sentimiento, sino una realidad objetiva que pone fin a la hostilidad causada por el pecado." },
+            { text: "Ahora, pues, ninguna condenación hay para los que están en Cristo Jesús.", reference: "— Romanos 8:1", reflection: "Para aquellos unidos a Cristo, la sentencia de condenación ha sido completamente anulada. La justicia de Dios fue satisfecha en la cruz, por lo tanto, estamos permanentemente libres de toda culpa y castigo." },
+            { text: "Acerquémonos, pues, confiadamente al trono de la gracia, para alcanzar misericordia y hallar gracia para el oportuno socorro.", reference: "— Hebreos 4:16", reflection: "Gracias a Cristo, nuestro Sumo Sacerdote, el trono de juicio de Dios se ha convertido para nosotros en un trono de gracia. Podemos acercarnos sin temor, con la plena seguridad de que recibiremos la misericordia y la ayuda que necesitamos." },
+            { text: "Y el mismo Dios de paz os santifique por completo; y todo vuestro ser, espíritu, alma y cuerpo, sea guardado irreprensible para la venida de nuestro Señor Jesucristo. Fiel es el que os llama, el cual también lo hará.", reference: "— 1 Tesalonicenses 5:23-24", reflection: "La santificación es obra de Dios en nosotros, abarcando cada área de nuestra vida. La fidelidad de Dios es la garantía de que esta obra de purificación y preservación se completará." },
+            { text: "Humillaos, pues, bajo la poderosa mano de Dios, para que él os exalte cuando fuere tiempo; echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros.", reference: "— 1 Pedro 5:6-7", reflection: "La humildad y la confianza están íntimamente ligadas. Al someternos a la voluntad de Dios y entregarle nuestras preocupaciones, demostramos nuestra dependencia de Él, quien a su debido tiempo nos honrará y cuidará de nosotros." },
+            { text: "La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo.", reference: "— Juan 14:27", reflection: "La paz que Cristo da es un regalo que trasciende las circunstancias. No es la ausencia de problemas, sino la presencia tranquilizadora de Dios en medio de ellos, guardando nuestro corazón de la turbación y el temor." },
+            { text: "Yo he venido para que tengan vida, y para que la tengan en abundancia.", reference: "— Juan 10:10b", reflection: "El propósito de Cristo no es solo darnos vida eterna en el futuro, sino una vida plena y abundante en el presente. Es una vida caracterizada por el gozo, el propósito y una profunda comunión con Dios." },
+            { text: "Pero recibiréis poder, cuando haya venido sobre vosotros el Espíritu Santo, y me seréis testigos...", reference: "— Hechos 1:8", reflection: "El poder para vivir la vida cristiana y ser testigos efectivos no proviene de nosotros, sino del Espíritu Santo. Es una promesa que nos capacita para cumplir la misión que Dios nos ha encomendado." },
+            { text: "Y de igual manera el Espíritu nos ayuda en nuestra debilidad; pues qué hemos de pedir como conviene, no lo sabemos, pero el Espíritu mismo intercede por nosotros con gemidos indecibles.", reference: "— Romanos 8:26", reflection: "Cuando no sabemos cómo orar, el Espíritu Santo viene en nuestra ayuda. Él intercede por nosotros desde nuestro interior, presentando nuestras necesidades a Dios de una manera perfecta y conforme a su voluntad." },
+            { text: "Os daré corazón nuevo, y pondré espíritu nuevo dentro de vosotros; y quitaré de vuestra carne el corazón de piedra, y os daré un corazón de carne.", reference: "— Ezequiel 36:26", reflection: "Esta es la promesa de la regeneración. Dios mismo se compromete a realizar un trasplante de corazón espiritual, reemplazando nuestra naturaleza dura e insensible por una nueva, tierna y obediente a Él." },
+            { text: "Así que, amados, puesto que tenemos tales promesas, limpiémonos de toda contaminación de carne y de espíritu, perfeccionando la santidad en el temor de Dios.", reference: "— 2 Corintios 7:1", reflection: "Las promesas de Dios son el gran motivador para la santidad. Sabiendo que somos hijos de Dios y que Él nos purificará, debemos cooperar activamente en el proceso, apartándonos del mal por reverencia a Él." },
+            { text: "Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.", reference: "— Mateo 18:20", reflection: "Cristo promete su presencia especial y poderosa cuando sus seguidores se reúnen en su nombre. Esta promesa es el fundamento de la comunión cristiana y del poder de la oración corporativa." },
+            { text: "He aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él, y cenaré con él, y él conmigo.", reference: "— Apocalipsis 3:20", reflection: "Cristo busca una comunión íntima y personal con nosotros. Él toma la iniciativa, y si respondemos a su llamado, promete una relación de amistad y satisfacción espiritual profunda." },
+            { text: "Y esta es la promesa que él nos hizo, la vida eterna.", reference: "— 1 Juan 2:25", reflection: "En el corazón de la fe cristiana se encuentra esta promesa suprema. Todo lo que Dios nos ha revelado y ofrecido en Cristo culmina en el regalo de una vida que nunca termina, en perfecta comunión con Él." },
+            { text: "El que venciere será vestido de vestiduras blancas; y no borraré su nombre del libro de la vida, y confesaré su nombre delante de mi Padre, y delante de sus ángeles.", reference: "— Apocalipsis 3:5", reflection: "A los que perseveran en la fe, Cristo les promete pureza (vestiduras blancas), seguridad eterna (su nombre en el libro de la vida) y reconocimiento público ante el Padre. Es una garantía de nuestra aceptación y recompensa final." },
+            { text: "En la casa de mi Padre muchas moradas hay; si así no fuera, yo os lo hubiera dicho; voy, pues, a preparar lugar para vosotros. Y si me fuere y os preparare lugar, vendré otra vez, y os tomaré a mí mismo, para que donde yo estoy, vosotros también estéis.", reference: "— Juan 14:2-3", reflection: "Jesús nos da la certeza de un hogar celestial preparado para nosotros. Su partida no fue un abandono, sino el inicio de los preparativos para nuestra reunión eterna, asegurándonos un lugar permanente en su presencia." },
+            { text: "No se turbe vuestro corazón; creéis en Dios, creed también en mí.", reference: "— Juan 14:1", reflection: "La fe en Cristo es el remedio soberano para un corazón turbado. Al confiar en Él como confiamos en Dios, encontramos la estabilidad y la paz que calman nuestras ansiedades más profundas." },
+            { text: "Porque el Señor mismo con voz de mando, con voz de arcángel, y con trompeta de Dios, descenderá del cielo; y los muertos en Cristo resucitarán primero. Luego nosotros los que vivimos, los que hayamos quedado, seremos arrebatados juntamente con ellos en las nubes para recibir al Señor en el aire, y así estaremos siempre con el Señor.", reference: "— 1 Tesalonicenses 4:16-17", reflection: "Esta es la bendita esperanza del creyente. La segunda venida de Cristo traerá la resurrección de los que durmieron y la transformación de los que viven, culminando en una reunión gloriosa y una comunión eterna con Él." },
+            { text: "Amados, ahora somos hijos de Dios, y aún no se ha manifestado lo que hemos de ser; pero sabemos que cuando él se manifieste, seremos semejantes a él, porque le veremos tal como él es.", reference: "— 1 Juan 3:2", reflection: "Nuestra identidad actual como hijos de Dios es una gloriosa realidad. Sin embargo, nos espera una transformación futura aún mayor: en la venida de Cristo, seremos hechos completamente como Él, porque lo veremos en toda su gloria." },
+            { text: "Enjugará Dios toda lágrima de los ojos de ellos; y ya no habrá muerte, ni habrá más llanto, ni clamor, ni dolor; porque las primeras cosas pasaron.", reference: "— Apocalipsis 21:4", reflection: "El cielo será un lugar de consuelo y restauración perfectos. Dios mismo eliminará toda fuente de tristeza y sufrimiento, inaugurando un estado eterno de gozo y paz donde el dolor será solo un recuerdo lejano." },
+            { text: "Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.", reference: "— Filipenses 4:7", reflection: "La paz de Dios es un regalo sobrenatural que actúa como una guarnición celestial, protegiendo nuestro ser interior de la ansiedad y la confusión. Es una tranquilidad que la lógica humana no puede explicar ni las circunstancias pueden arrebatar." },
+            { text: "Esforzaos todos vosotros los que esperáis en Jehová, Y tome aliento vuestro corazón.", reference: "— Salmos 31:24", reflection: "La esperanza en el Señor es la fuente del verdadero coraje espiritual. A medida que confiamos en Sus promesas y esperamos en Su tiempo, nuestro corazón se llena de una fuerza divina para perseverar." },
+            { text: "Echa sobre Jehová tu carga, y él te sustentará; No dejará para siempre caído al justo.", reference: "— Salmos 55:22", reflection: "Dios nos invita a transferirle el peso de nuestras preocupaciones. Él no solo promete llevar nuestra carga, sino también sustentarnos a nosotros, asegurando que aunque tropecemos, no quedaremos postrados permanentemente." },
+            { text: "Mi carne y mi corazón desfallecen; Mas la roca de mi corazón y mi porción es Dios para siempre.", reference: "— Salmos 73:26", reflection: "Cuando nuestra fuerza física y emocional se agota, Dios se convierte en la fortaleza inamovible de nuestro ser interior. Él es nuestro tesoro y nuestra herencia eterna, una fuente de vida que nunca falla." },
+            { text: "Porque a sus ángeles mandará acerca de ti, Que te guarden en todos tus caminos.", reference: "— Salmos 91:11", reflection: "Dios delega a sus ángeles la tarea de ministrar y proteger a sus hijos. Esta promesa nos asegura una custodia celestial invisible pero poderosa mientras caminamos en obediencia a Su voluntad." },
+            { text: "El que habita al abrigo del Altísimo Morará bajo la sombra del Omnipotente.", reference: "— Salmos 91:1", reflection: "Vivir en una comunión íntima y constante con Dios (habitar en su abrigo) nos coloca bajo su protección todopoderosa. Es una promesa de seguridad y descanso para aquellos que hacen de Dios su morada." },
+            { text: "Lámpara es a mis pies tu palabra, Y lumbrera a mi camino.", reference: "— Salmos 119:105", reflection: "La Palabra de Dios nos ofrece una guía doble: ilumina nuestro próximo paso (lámpara a nuestros pies) y nos da una dirección general para el viaje de la vida (lumbrera a nuestro camino). Es nuestra fuente infalible de orientación." },
+            { text: "Mucha paz tienen los que aman tu ley, Y no hay para ellos tropiezo.", reference: "— Salmos 119:165", reflection: "Un amor genuino por la Palabra de Dios produce una profunda paz interior y una estabilidad espiritual. Aquellos que se deleitan en sus preceptos encuentran una firmeza que les impide ser derribados por las ofensas o las dificultades." },
+            { text: "Fíate de Jehová de todo tu corazón, Y no te apoyes en tu propia prudencia.", reference: "— Proverbios 3:5", reflection: "La verdadera sabiduría consiste en desconfiar de nuestro entendimiento limitado y depositar una confianza total en la dirección de Dios. Es un llamado a rendir nuestra independencia intelectual a Su soberanía." },
+            { text: "Reconócelo en todos tus caminos, Y él enderezará tus veredas.", reference: "— Proverbios 3:6", reflection: "Cuando sometemos cada área de nuestra vida a la autoridad de Dios y buscamos su voluntad, Él promete dirigirnos y eliminar los obstáculos de nuestro camino, asegurando que lleguemos a nuestro destino." },
+            { text: "El nombre de Jehová es torre fuerte; A él correrá el justo, y será levantado.", reference: "— Proverbios 18:10", reflection: "El carácter de Dios (su nombre) es una fortaleza inexpugnable para el creyente. En tiempos de peligro o angustia, correr a Él en fe nos garantiza protección y seguridad." },
+            { text: "Porque mis pensamientos no son vuestros pensamientos, ni vuestros caminos mis caminos, dijo Jehová.", reference: "— Isaías 55:8", reflection: "Esta declaración nos llama a la humildad y a la confianza. Los planes y métodos de Dios son infinitamente más sabios que los nuestros. Debemos confiar en Su sabiduría superior, especialmente cuando no entendemos sus caminos." },
+            { text: "Y me ha dicho: Bástate mi gracia; porque mi poder se perfecciona en la debilidad.", reference: "— 2 Corintios 12:9", reflection: "La gracia de Dios es siempre suficiente para cada una de nuestras necesidades. Es en el reconocimiento de nuestra propia insuficiencia donde el poder de Cristo se manifiesta con mayor plenitud en nuestras vidas." },
+            { text: "Porque el ocuparse de la carne es muerte, pero el ocuparse del Espíritu es vida y paz.", reference: "— Romanos 8:6", reflection: "La dirección de nuestra mente determina nuestro destino espiritual. Fijar nuestros pensamientos en las cosas del Espíritu Santo conduce a una vida de vitalidad espiritual y paz interior, mientras que una mente centrada en lo pecaminoso lleva a la muerte espiritual." },
+            { text: "Y la esperanza no avergüenza; porque el amor de Dios ha sido derramado en nuestros corazones por el Espíritu Santo que nos fue dado.", reference: "— Romanos 5:5", reflection: "Nuestra esperanza cristiana es segura y nunca nos decepcionará, porque está fundada en una experiencia real: el derramamiento del amor de Dios en nuestro interior por el Espíritu Santo, que es el anticipo de la gloria venidera." },
+            { text: "Por tanto, no desmayamos; antes aunque este nuestro hombre exterior se va desgastando, el interior no obstante se renueva de día en día.", reference: "— 2 Corintios 4:16", reflection: "Aunque el cuerpo físico envejece y se debilita, nuestro espíritu puede experimentar una renovación y un fortalecimiento constantes. Las aflicciones externas pueden, por la gracia de Dios, contribuir a nuestro crecimiento interior." },
+            { text: "Así que, hermanos míos amados, estad firmes y constantes, creciendo en la obra del Señor siempre, sabiendo que vuestro trabajo en el Señor no es en vano.", reference: "— 1 Corintios 15:58", reflection: "La doctrina de la resurrección es el gran fundamento de nuestra perseverancia cristiana. Porque Cristo resucitó y nosotros resucitaremos, tenemos la plena seguridad de que nuestro servicio a Él tiene un valor y una recompensa eternos." },
+            { text: "Mas gracias sean dadas a Dios, que nos da la victoria por medio de nuestro Señor Jesucristo.", reference: "— 1 Corintios 15:57", reflection: "La victoria sobre el pecado y la muerte no es algo que logramos, sino algo que recibimos como un regalo a través de Jesucristo. Es una victoria segura y completa que nos llena de gratitud." },
+            { text: "Y todo lo que pidiereis al Padre en mi nombre, lo haré, para que el Padre sea glorificado en el Hijo.", reference: "— Juan 14:13", reflection: "Orar en el nombre de Jesús significa orar de acuerdo con su carácter y su voluntad. Cuando lo hacemos, Él promete actuar para que el Padre reciba toda la gloria, asegurando que nuestras oraciones alineadas con su propósito sean contestadas." },
+            { text: "Hasta ahora nada habéis pedido en mi nombre; pedid, y recibiréis, para que vuestro gozo sea cumplido.", reference: "— Juan 16:24", reflection: "Jesús nos anima a una oración audaz y específica en su nombre, prometiendo que la respuesta a tales oraciones resultará en una plenitud de gozo. La oración contestada es una fuente de profunda alegría espiritual." },
+            { text: "Porque donde esté vuestro tesoro, allí estará también vuestro corazón.", reference: "— Mateo 6:21", reflection: "Este principio espiritual revela que aquello que más valoramos inevitablemente captura nuestros afectos y nuestra lealtad. Es un llamado a invertir en las riquezas celestiales para que nuestro corazón esté anclado en la eternidad." },
+            { text: "Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas.", reference: "— Mateo 6:33", reflection: "Cuando hacemos de la búsqueda del reino de Dios y su voluntad nuestra principal prioridad, Él se compromete a cuidar de nuestras necesidades materiales. Es una promesa que nos libera de la ansiedad por las cosas de esta vida." },
+            { text: "No os afanéis, pues, por el día de mañana, porque el día de mañana traerá su afán. Basta a cada día su propio mal.", reference: "— Mateo 6:34", reflection: "Jesús nos llama a vivir en el presente, confiando en la providencia de Dios para el futuro. La ansiedad por el mañana es una carga inútil que Dios no quiere que llevemos. Su gracia es suficiente para los desafíos de hoy." },
+            { text: "Porque también Cristo padeció una sola vez por los pecados, el justo por los injustos, para llevarnos a Dios.", reference: "— 1 Pedro 3:18", reflection: "El propósito final del sacrificio de Cristo fue reconciliarnos con Dios. Su muerte como nuestro sustituto perfecto abrió el camino para que pudiéramos tener acceso directo y comunión con el Padre." },
+            { text: "Y el que no toma su cruz y sigue en pos de mí, no es digno de mí.", reference: "— Mateo 10:38", reflection: "El discipulado cristiano implica una disposición a morir a uno mismo, a nuestros propios deseos y ambiciones, para seguir a Cristo. La cruz representa la entrega total y la aceptación del costo de ser su seguidor." },
+            { text: "Y poderoso es Dios para hacer que abunde en vosotros toda gracia, a fin de que, teniendo siempre en todas las cosas todo lo suficiente, abundéis para toda buena obra.", reference: "— 2 Corintios 9:8", reflection: "Dios no solo nos da gracia para la salvación, sino también para el servicio. Él promete proveernos abundantemente de todo lo que necesitamos (espiritual, material y físicamente) para que podamos ser generosos y fructíferos en buenas obras." },
+            { text: "Porque ejemplo os he dado, para que como yo os he hecho, vosotros también hagáis.", reference: "— Juan 13:15", reflection: "El acto de Jesús de lavar los pies de los discípulos establece el patrón para la vida cristiana: el servicio humilde. Estamos llamados a seguir su ejemplo, sirviéndonos unos a otros con amor y humildad." },
+            { text: "No que seamos competentes por nosotros mismos para pensar algo como de nosotros mismos, sino que nuestra competencia proviene de Dios.", reference: "— 2 Corintios 3:5", reflection: "Nuestra capacidad para cualquier servicio espiritual o ministerio no se origina en nuestros talentos o habilidades naturales. Toda nuestra suficiencia y efectividad provienen directamente de Dios, lo que nos mantiene humildes y dependientes de Él." },
+            { text: "Y yo les doy vida eterna; y no perecerán jamás, ni nadie las arrebatará de mi mano.", reference: "— Juan 10:28", reflection: "Esta es una de las más firmes promesas de seguridad eterna. La vida que Jesús da es permanente, y su poder para proteger a sus ovejas es absoluto. Nada ni nadie puede quitarnos de su cuidado soberano." },
+            { text: "Mi Padre que me las dio, es mayor que todos, y nadie las puede arrebatar de la mano de mi Padre.", reference: "— Juan 10:29", reflection: "Nuestra seguridad se duplica: no solo estamos en la mano del Hijo, sino también en la mano del Padre. El poder combinado de la Deidad garantiza nuestra preservación eterna, haciendo imposible que nos perdamos." },
+            { text: "Antes, en todas estas cosas somos más que vencedores por medio de aquel que nos amó.", reference: "— Romanos 8:37", reflection: "En medio de las pruebas y tribulaciones, no solo sobrevivimos, sino que obtenemos una victoria abrumadora. Este triunfo no se debe a nuestra fuerza, sino al poder de Cristo que obra en nosotros a través de su amor." },
+            { text: "El que no escatimó ni a su propio Hijo, sino que lo entregó por todos nosotros, ¿cómo no nos dará también con él todas las cosas?", reference: "— Romanos 8:32", reflection: "El sacrificio de Cristo es la máxima prueba del amor de Dios y la garantía de su provisión continua. Si Dios nos dio el regalo más costoso, podemos confiar en que no nos negará ningún bien menor que necesitemos." },
+            { text: "El ladrón no viene sino para hurtar y matar y destruir; yo he venido para que tengan vida, y para que la tengan en abundancia.", reference: "— Juan 10:10", reflection: "Jesús contrasta el propósito destructivo de Satanás con su propio propósito vivificante. Él no solo nos rescata de la muerte espiritual, sino que nos introduce a una vida de plenitud, propósito y gozo." },
+            { text: "Y esta es la confianza que tenemos en él, que si pedimos alguna cosa conforme a su voluntad, él nos oye.", reference: "— 1 Juan 5:14", reflection: "La oración eficaz se alinea con la voluntad de Dios. Cuando nuestro deseo es ver su voluntad cumplida, podemos tener la plena confianza de que Él no solo escucha, sino que también responderá afirmativamente a nuestra petición." },
+            { text: "Toda buena dádiva y todo don perfecto desciende de lo alto, del Padre de las luces, en el cual no hay mudanza, ni sombra de variación.", reference: "— Santiago 1:17", reflection: "Toda bendición en nuestra vida tiene su origen en Dios. Su carácter inmutable es la garantía de su bondad constante, asegurándonos que su naturaleza generosa nunca cambiará ni vacilará." },
+            { text: "Honra a Jehová сon tus bienes, Y con las primicias de todos tus frutos; Y serán llenos tus graneros con abundancia, Y tus lagares rebosarán de mosto.", reference: "— Proverbios 3:9-10", reflection: "Cuando reconocemos a Dios como el dueño de todo y le honramos con la primera y la mejor parte de nuestras posesiones, Él promete bendecir el resto. Es un principio de fe que desata la provisión abundante de Dios." },
+            { text: "Traed todos los diezmos al alfolí y haya alimento en mi casa; y probadme ahora en esto, dice Jehová de los ejércitos, si no os abriré las ventanas de los cielos, y derramaré sobre vosotros bendición hasta que sobreabunde.", reference: "— Malaquías 3:10", reflection: "Dios desafía a su pueblo a probar su fidelidad a través de la obediencia en la mayordomía. La entrega de los diezmos es un acto de fe que Dios promete honrar con una bendición abrumadora y sobrenatural." },
+            { text: "Y el que da semilla al que siembra, y pan al que come, proveerá y multiplicará vuestra sementera, y aumentará los frutos de vuestra justicia.", reference: "— 2 Corintios 9:10", reflection: "Dios es la fuente de todo lo que tenemos, tanto para nuestro sustento (pan) como para nuestra generosidad (semilla). Cuando somos fieles en sembrar generosamente, Él promete multiplicar nuestros recursos para que podamos dar aún más." },
+            { text: "Someteos, pues, a Dios; resistid al diablo, y huirá de vosotros.", reference: "— Santiago 4:7", reflection: "La victoria sobre el enemigo comienza con la sumisión a Dios. Desde esa posición de obediencia, podemos resistir firmemente las tentaciones y ataques del diablo, con la promesa segura de que él será puesto en fuga." },
+            { text: "Por lo demás, hermanos míos, fortaleceos en el Señor, y en el poder de su fuerza.", reference: "— Efesios 6:10", reflection: "La fuerza para la batalla espiritual no se encuentra en nosotros mismos, sino en el Señor. Debemos apropiarnos continuamente del poder inagotable de su fuerza, dependiendo de Él para cada victoria." }
         ];
 
-        // Obtiene el botón y el texto del versículo por su ID
+        // Obtiene los elementos del DOM por su ID
         const changeVerseBtn = document.getElementById('change-verse-btn');
         const verseText = document.getElementById('verse-text');
-        const verseReference = document.querySelector('.text-gray-500');
+        const verseReference = document.getElementById('verse-reference');
+        const reflectionText = document.getElementById('reflection-text');
+        const verseContainer = document.getElementById('verse-container');
+        const reflectionContainer = document.getElementById('reflection-container');
+        
         let currentVerseIndex = 0;
 
-        // Función para cambiar el versículo
+        // Función para cambiar el versículo y la reflexión
         changeVerseBtn.addEventListener('click', () => {
-            currentVerseIndex = (currentVerseIndex + 1) % verses.length;
+            // Selecciona un índice aleatorio que sea diferente al actual
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * verses.length);
+            } while (newIndex === currentVerseIndex);
+            
+            currentVerseIndex = newIndex;
             const newVerse = verses[currentVerseIndex];
             
-            // Actualiza el contenido con una pequeña transición
-            verseText.style.opacity = '0';
-            verseReference.style.opacity = '0';
+            // Aplica el efecto de desvanecimiento
+            verseContainer.style.opacity = '0';
+            reflectionContainer.style.opacity = '0';
             
+            // Espera a que termine la transición para actualizar el contenido
             setTimeout(() => {
-                verseText.textContent = newVerse.text;
+                verseText.textContent = `"${newVerse.text}"`;
                 verseReference.textContent = newVerse.reference;
-                verseText.style.opacity = '1';
-                verseReference.style.opacity = '1';
+                reflectionText.textContent = newVerse.reflection;
+                
+                // Aplica el efecto de aparición
+                verseContainer.style.opacity = '1';
+                reflectionContainer.style.opacity = '1';
             }, 300);
         });
+
+        // Inicializa la página con un versículo aleatorio al cargar.
+        window.addEventListener('load', () => {
+            currentVerseIndex = Math.floor(Math.random() * verses.length);
+            const initialVerse = verses[currentVerseIndex];
+            verseText.textContent = `"${initialVerse.text}"`;
+            verseReference.textContent = initialVerse.reference;
+            reflectionText.textContent = initialVerse.reflection;
+        });
+
     </script>
 
 </body>
 </html>
+
